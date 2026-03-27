@@ -1,0 +1,1 @@
+re-designed main.js - moved settings to a separate popup. adjusted sign_in input field length to match its container so user mouse cursor changes correctly

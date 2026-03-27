@@ -1,0 +1,211 @@
+.Call_window {
+    height: 100vh;
+    background: linear-gradient(-45deg, #B89A75, #9A75B8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+/* ==============Remote video (big area)=============== */
+.remote_video_container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(70%, 90%, 1200px);
+    margin: 0 auto;
+    transform: translateY(25px);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.658);
+}
+.remote_video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* =============Local video (small box in corner)============== */
+.local_video_container {
+    position: absolute;
+    bottom: 90px;
+    right: 20px;
+    width: 220px;
+    height: 140px;
+    /* width: 100%;
+    height: 100%; */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+.local_video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* ================Controls at bottom============== */
+.call_controls {
+    height: 80px;
+    width: 50%;
+    margin: 35px auto;
+    transform: translateY(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    background: rgba(63, 60, 60, 0);
+    box-shadow: none;
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+.call_controls.activate_hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.658);
+    background: rgba(63, 60, 60, 0.4);
+}
+.hangup_btn {
+    background-color: #c44141;
+    color: white;
+}
+.camera_off_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+    background: rgb(150, 150, 150);
+    z-index: 10;
+}
+/* ==============styling for the control buttons=============== */
+.control_btn {
+    /* padding: 12px 22px; */
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    font-size: 8px;
+    border: none;
+    cursor: pointer;
+    background: white;
+    transition: transform 0.15s ease, box-shadow 0.2s;
+}
+/* Hover: subtle pulse */
+.control_btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(255,255,255,0.4);
+}
+/* Click: bounce */
+.control_btn:active {
+    transform: scale(0.92);
+}
+/* translate panel button */
+.translate_btn {
+    background: #9a75b88e;
+    color: white;
+}
+.translate_btn.off {
+    background: #888;
+}
+/* mic button */
+.mic_btn {
+    /* background: #4caf50; */
+    background: #9a75b88e;
+    color: white;
+}
+.mic_btn.off {
+    background: #d9534f;
+}
+/* camera button */
+.cam_btn {
+    background: #9a75b88e;
+    color: white;
+}
+.cam_btn.off {
+    background: #888;
+    
+}
+/* hangup button */
+.hangup_btn {
+    background: #d9534f;
+    color: white;
+    box-shadow: 0 0 10px rgba(217,83,79,0.6);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.hangup_btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 18px rgba(217,83,79,0.9);
+}
+/* Little shake animation */
+.hangup_btn:active {
+    animation: shake 0.2s;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+/* ============== translation panel ================= */
+/* Right-side translation panel (occupies remaining 20%) */
+.translation_panel_wrapper {
+    position: absolute;
+    bottom: 22px;
+    left: 10px;
+    width: 15%;
+    height: calc(100% - 280px);  /* leave room for the bottom controls */
+    background: rgba(63, 60, 60, 0.4);
+    backdrop-filter: blur(3px);
+    padding: 16px;
+    overflow: hidden;
+    box-shadow: -3px 0 12px rgba(0, 0, 0, 0.15);
+    color: white;
+
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    z-index: 100;
+}
+.translation_panel_wrapper.closed {
+    width: 60px;        /* circular icon size */
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(63, 60, 60, 0.4);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* to cancel the padding of the panel when it becomes an icon */
+    padding: 0;
+}
+.translation_panel_wrapper.closed .translation_panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; /* or column—it doesn’t matter here */
+}
+.translation_panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.translation_panel h3 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+.translation_output {
+    margin-top: 12px;
+    padding: 12px;
+    background: transparent;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    height: 80%;
+    overflow-y: auto;
+}
