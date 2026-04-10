@@ -4,12 +4,12 @@ import pkg from "pg";
 
 const { Pool } = pkg;
 
-const pool = new Pool ({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'lexi_db',
-    password: 'vErYR@nd0m9a$$wOrD!',
-    port: 5432
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT
 });
 
 async function testConnection() {
